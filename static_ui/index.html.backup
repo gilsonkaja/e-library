@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cloud eLibrary</title>
+  <link rel="stylesheet" href="/ui/style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <div id="authContainer" class="auth-container">
+    <div class="auth-card">
+      <div class="brand" style="justify-content:center; margin-bottom:20px;">
+        <span>📚</span> Cloud eLibrary
+      </div>
+
+      <div class="auth-tabs">
+        <div id="tabLogin" class="auth-tab active" onclick="app.switchAuthTab('login')">Login</div>
+        <div id="tabSignup" class="auth-tab" onclick="app.switchAuthTab('signup')">Sign Up</div>
+      </div>
+
+      <!-- Login Form -->
+      <div id="formLogin">
+        <input id="li_email" placeholder="Email Address" />
+        <input id="li_pass" type="password" placeholder="Password" />
+        <button onclick="app.login()" style="width:100%">Sign In</button>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="formSignup" class="hidden">
+        <input id="su_name" placeholder="Full Name" />
+        <input id="su_email" placeholder="Email Address" />
+        <input id="su_pass" type="password" placeholder="Create Password" />
+        <button onclick="app.signup()" style="width:100%">Create Account</button>
+      </div>
+
+      <div style="text-align:center; margin-top:20px; color:var(--text-muted); font-size:0.9rem;">
+        Demo: admin@demo.com / password
+      </div>
+    </div>
+  </div>
+
+  <!-- App Shell -->
+  <div id="appShell" class="hidden" style="display:flex; height:100vh; width:100%;">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span>📚</span> eLibrary
+      </div>
+      <nav>
+        <div class="nav-item active" onclick="app.navigate('library')">
+          <span>📖</span> Library
+        </div>
+        <div class="nav-item" onclick="app.navigate('upload')">
+          <span>☁️</span> Upload
+        </div>
+        <div class="nav-item admin-only hidden" onclick="app.navigate('admin')">
+          <span>👑</span> Admin
+        </div>
+        <div class="nav-item" onclick="app.logout()">
+          <span>🚪</span> Logout
+        </div>
+      </nav>
+      <div class="spacer"></div>
+      <div id="authStatus" class="nav-item" style="font-size: 0.85rem; cursor:default; opacity:0.7;">
+        User
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- Library View -->
+      <div id="view-library" class="view">
+        <div class="flex-row" style="margin-bottom: 30px;">
+          <h2>My Library</h2>
+          <div class="spacer"></div>
+          <button class="secondary icon-btn" onclick="app.refreshLibrary()" title="Refresh">↻</button>
+        </div>
+        <div id="libraryGrid" class="library-grid">
+          <!-- Books injected here -->
+        </div>
+      </div>
+
+      <!-- Upload View -->
+      <div id="view-upload" class="view hidden">
+        <h2>Add to Library</h2>
+        <div style="max-width: 600px; margin-top:20px;">
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 16px; border:1px solid var(--border);">
+            <h3 style="margin-bottom:20px;">Book Details</h3>
+            <input id="up_title" placeholder="Book Title" />
+            <input id="up_author" placeholder="Author Name" />
+
+            <!-- Pricing Toggle -->
+            <div style="margin-bottom: 20px;">
+              <label
+                style="display:block; margin-bottom:10px; font-weight:600; font-size:0.9rem; color:var(--text-muted);">Pricing</label>
+              <div style="display:flex; gap:20px;">
+                <label
+                  style="display:flex; align-items:center; cursor:pointer; padding:10px; background:var(--bg-main); border-radius:8px; border:1px solid var(--border); flex:1;">
+                  <input type="radio" name="pricingType" value="free" checked onchange="app.togglePriceInput(false)">
+                  <span style="margin-left:8px; font-weight:500;">Free Book</span>
+                </label>
+                <label
+                  style="display:flex; align-items:center; cursor:pointer; padding:10px; background:var(--bg-main); border-radius:8px; border:1px solid var(--border); flex:1;">
+                  <input type="radio" name="pricingType" value="paid" onchange="app.togglePriceInput(true)">
+                  <span style="margin-left:8px; font-weight:500;">Paid Book</span>
+                </label>
+              </div>
+            </div>
+
+            <div id="priceInputContainer" class="hidden" style="margin-bottom: 15px;">
+              <input id="up_price" type="number" step="0.01" placeholder="Enter Price (e.g. 9.99)" />
+            </div>
+
+            <textarea id="up_desc" placeholder="Description (optional)" style="min-height:100px;"></textarea>
+
+            <h3 style="margin:20px 0 15px;">Upload PDF</h3>
+            <div
+              style="border: 2px dashed var(--border); padding: 30px; text-align:center; border-radius:12px; margin-bottom:20px; cursor:pointer;"
+              onclick="document.getElementById('up_file').click()">
+              <span style="font-size:2rem; display:block; margin-bottom:10px;">📄</span>
+              <span style="color:var(--accent);">Click to select PDF</span>
+            </div>
+            <input type="file" id="up_file" accept=".pdf" style="display:none"
+              onchange="alert('File selected: ' + this.files[0].name)" />
+
+            <button onclick="app.uploadBook()" style="width:100%;">Add to Library</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard View -->
+      <div id="view-admin" class="view hidden">
+        <h2>Admin Dashboard</h2>
+
+        <!-- Analytics Cards -->
+        <div class="admin-stats">
+          <div class="stat-card">
+            <div class="stat-label">Total Customers</div>
+            <div class="stat-value" id="statCustomers">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value" id="statRevenue">₹0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Transactions</div>
+            <div class="stat-value" id="statTransactions">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Success Rate</div>
+            <div class="stat-value" id="statSuccessRate">0%</div>
+          </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div style="margin-top: 40px;">
+          <h3>Customers</h3>
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Purchases</th>
+                  <th>Total Spent</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customersTableBody">
+                <!-- Customers injected here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Payments Table -->
+        <div style="margin-top: 40px;">
+          <h3>Recent Payments</h3>
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="paymentsTableBody">
+                <!-- Payments injected here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Reader Overlay -->
+  <div id="readerView" class="reader-view hidden">
+    <header class="reader-header">
+      <button class="secondary" onclick="app.closeReader()">← Back</button>
+      <span id="readerTitle"
+        style="font-weight:bold; max-width:400px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Book
+        Title</span>
+      <div class="flex-row" style="position:relative;">
+        <button class="secondary icon-btn" onclick="app.toggleSettings()">Aa</button>
+        <button onclick="app.showSummary()">✨ AI Summary</button>
+
+        <!-- Settings Menu -->
+        <div id="readerSettings" class="settings-menu">
+          <div style="font-size:0.8rem; font-weight:bold; margin-bottom:10px; color:var(--text-muted);">THEME</div>
+          <div class="theme-options">
+            <div class="theme-circle" style="background:#fff; border-color:#ddd;" onclick="app.setTheme('light')"></div>
+            <div class="theme-circle" style="background:#f4ecd8; border-color:#d3c4b1;" onclick="app.setTheme('sepia')">
+            </div>
+            <div class="theme-circle active" style="background:#121212; border-color:#333;"
+              onclick="app.setTheme('dark')"></div>
+          </div>
+          <div
+            style="font-size:0.8rem; font-weight:bold; margin-bottom:10px; color:var(--text-muted); margin-top:15px;">
+            FONT SIZE</div>
+          <div class="flex-row">
+            <button class="secondary icon-btn" onclick="app.adjustFont(-2)">-</button>
+            <span id="fontSizeDisplay" style="font-size:0.9rem;">100%</span>
+            <button class="secondary icon-btn" onclick="app.zoomIn()" title="Zoom In">+</button>
+            <button class="secondary icon-btn" onclick="app.resetZoom()" title="Fit to Width">⊡</button>
+          </div>
+
+          <!-- Touch Zones for Mobile -->
+          <div class="touch-zone left" id="touchLeft"></div>
+          <div class="touch-zone right" id="touchRight"></div>
+        </div>
+      </div>
+
+      <!-- AI Summary Modal -->
+      <div id="summaryModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" onclick="app.closeModal('summaryModal')">&times;</span>
+          <h2 style="color: var(--accent); display:flex; align-items:center; gap:10px;">
+            <span>✨</span> AI Insights
+          </h2>
+          <div id="summaryBody" style="line-height: 1.8; font-size:1.05rem;">
+            Loading analysis...
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Modal -->
+      <div id="paymentModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" onclick="app.closeModal('paymentModal')">&times;</span>
+          <h2 style="color: var(--accent); display:flex; align-items:center; gap:10px;">
+            <span>💳</span> Complete Payment
+          </h2>
+
+          <div id="paymentBookInfo"
+            style="margin:20px 0; padding:20px; background:var(--bg-app); border:1px solid var(--border);"></div>
+
+          <div class="payment-methods">
+            <button onclick="app.selectPaymentMethod('card')" class="payment-method-btn">
+              💳 Credit/Debit Card
+            </button>
+            <button onclick="app.selectPaymentMethod('upi')" class="payment-method-btn">
+              📱 UPI
+            </button>
+          </div>
+
+          <div id="cardForm" class="hidden" style="margin-top:20px;">
+            <input placeholder="Card Number" style="margin-bottom:10px;" />
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+              <input placeholder="MM/YY" style="flex:1;" />
+              <input placeholder="CVV" style="flex:1;" />
+            </div>
+            <button onclick="app.processPayment('card')" style="width:100%; margin-top:15px;">
+              Pay Now
+            </button>
+          </div>
+
+          <div id="upiForm" class="hidden" style="margin-top:20px;">
+            <input id="upiId" placeholder="Enter UPI ID (e.g., user@paytm)" style="margin-bottom:10px;" />
+            <button onclick="app.processPayment('upi')" style="width:100%; margin-top:15px;">
+              Pay with UPI
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script src="/ui/app.js"></script>
+      </body>
+
+</html>

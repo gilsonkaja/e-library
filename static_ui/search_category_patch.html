@@ -1,0 +1,22 @@
+<!-- HTML PATCH FOR SEARCH AND CATEGORY UI -->
+<!-- Insert this code in index.html after line 56 (inside the library view, before libraryGrid) -->
+
+<!-- Search Bar -->
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search books by title, author, or category..."
+        oninput="app.searchBooks(this.value)" />
+    <button class="clear-search-btn" onclick="app.clearSearch()">Clear</button>
+</div>
+
+<!-- Category Filters -->
+<div id="categoryFilters" class="category-filters"></div>
+
+<!-- INSTRUCTIONS:
+1. Open backend/static_ui/index.html
+2. Find the line with: <div id="libraryGrid" class="library-grid"></div>
+3. Insert the above HTML code BEFORE that line
+4. Save the file
+5. Refresh your browser
+
+The JavaScript and CSS are already in place and will work automatically once this HTML is added.
+-->

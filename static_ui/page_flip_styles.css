@@ -1,0 +1,79 @@
+﻿/* Enhanced Realistic Page Turn Animation */
+.pdf-page-canvas {
+  max-width: 48%;
+  height: auto;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.pdf-page-canvas.left-page {
+  transform-origin: right center;
+}
+
+.pdf-page-canvas.right-page {
+  transform-origin: left center;
+}
+
+.pdf-page-canvas.flipping-left {
+  animation: flipPageLeft 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.pdf-page-canvas.flipping-right {
+  animation: flipPageRight 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@keyframes flipPageLeft {
+  0% {
+    transform: perspective(1200px) rotateY(0deg);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  25% {
+    transform: perspective(1200px) rotateY(-15deg) translateZ(50px);
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    transform: perspective(1200px) rotateY(-90deg) translateZ(80px) translateX(-20px);
+    box-shadow: -20px 20px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
+  }
+  75% {
+    transform: perspective(1200px) rotateY(-165deg) translateZ(50px);
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: perspective(1200px) rotateY(-180deg);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes flipPageRight {
+  0% {
+    transform: perspective(1200px) rotateY(0deg);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  25% {
+    transform: perspective(1200px) rotateY(15deg) translateZ(50px);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    transform: perspective(1200px) rotateY(90deg) translateZ(80px) translateX(20px);
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
+  }
+  75% {
+    transform: perspective(1200px) rotateY(165deg) translateZ(50px);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: perspective(1200px) rotateY(180deg);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .pdf-spread { flex-direction: column; gap: 10px; }
+  .pdf-page-canvas { max-width: 100%; }
+  .pdf-page-canvas.right-page { display: none; }
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "b0ff9117-7cd7-4bdf-af14-b242f6503e63",
+    "title": "E2E Book",
+    "author": "Test Author",
+    "description": "E2E test",
+    "filename": "1763874987587-65861952-928a-4732-805a-65235324e4ad.txt",
+    "epubFilename": null,
+    "premium": false,
+    "uploadedAt": "2025-11-23T05:16:27.558403"
+  },
+  {
+    "id": "0ccee19e-cbe2-4975-b074-f356fdbd3f8b",
+    "title": "Demo Book",
+    "author": "Demo Author",
+    "description": "",
+    "filename": "/uploads/1763877022717-32eefecf-6820-4c1e-86b6-1e0f80bc9aeb.pdf",
+    "epubFilename": null,
+    "premium": false,
+    "uploadedAt": "2025-11-23T05:50:22.703428"
+  },
+  {
+    "id": "16b75123-1130-4642-a4eb-6be8af41635c",
+    "title": "Demo Book",
+    "author": "Demo Author",
+    "description": "",
+    "filename": "1763877417092-3182f77f-34f8-483a-92c8-ef1b6b532a70.pdf",
+    "epubFilename": null,
+    "premium": false,
+    "uploadedAt": "2025-11-23T05:56:57.077992"
+  },
+  {
+    "id": "301b13fe-b567-4ae6-8aad-323e1446715f",
+    "title": "Demo Book",
+    "author": "Demo Author",
+    "description": "",
+    "filename": "1763877463963-1c8c7b80-9475-47c9-a790-6dfe9d6cd595.pdf",
+    "epubFilename": null,
+    "premium": false,
+    "uploadedAt": "2025-11-23T05:57:43.945347"
+  },
+  {
+    "id": "8a1ecf87-a95b-4f10-9217-08c2bfa04c73",
+    "title": "gilson",
+    "author": "gilson",
+    "description": "",
+    "filename": "1763892629105-0c70f729-7a1d-49a7-abe8-5ff58c7d4bc6.pdf",
+    "epubFilename": null,
+    "premium": false,
+    "uploadedAt": "2025-11-23T10:10:28.992527"
+  },
+  {
+    "id": "b93ddc8a-645f-4a02-b76b-4c5cde768a37",
+    "title": "Wings of Fire",
+    "author": "ABDUL Kalam",
+    "description": "",
+    "filename": "1763918753557-7ce9ce1d-d4db-408e-8b39-59032d527d42.pdf",
+    "epubFilename": null,
+    "premium": false,
+    "price": 1000.0,
+    "uploadedAt": "2025-11-23T17:25:53.485145"
+  }
+]

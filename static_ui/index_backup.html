@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cloud eLibrary</title>
+  <link rel="stylesheet" href="/ui/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <div id="authContainer" class="auth-container">
+    <div class="auth-card">
+      <div class="brand" style="justify-content:center; margin-bottom:20px;">
+        <span></span> Cloud eLibrary
+      </div>
+      <div class="auth-tabs">
+        <div id="tabLogin" class="auth-tab active" onclick="app.switchAuthTab('login')">Login</div>
+        <div id="tabSignup" class="auth-tab" onclick="app.switchAuthTab('signup')">Sign Up</div>
+      </div>
+      <div id="formLogin">
+        <input id="li_email" placeholder="Email Address" />
+        <input id="li_pass" type="password" placeholder="Password" />
+        <button onclick="app.login()" style="width:100%">Sign In</button>
+      </div>
+      <div id="formSignup" class="hidden">
+        <input id="su_name" placeholder="Full Name" />
+        <input id="su_email" placeholder="Email Address" />
+        <input id="su_pass" type="password" placeholder="Create Password" />
+        <button onclick="app.signup()" style="width:100%">Create Account</button>
+      </div>
+      <div style="text-align:center; margin-top:20px; color:var(--text-muted); font-size:0.9rem;">
+        Demo: admin@demo.com / password
+      </div>
+    </div>
+  </div>

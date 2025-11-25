@@ -1,0 +1,44 @@
+[
+  {
+    "id": "f7c101c4-ddc3-482e-ab94-a511115b4667",
+    "name": "Test User",
+    "email": "test@example.com",
+    "passwordHash": "$2b$12$hNUFPhGUm9YYKnAZrpTXC.Sam8udhZfy0Oh.Rut1mHf4acQAEGBm2",
+    "isAdmin": true
+  },
+  {
+    "id": "fb9fea5a-322a-4229-8e8c-dee9eccd5192",
+    "name": "e2eadmin",
+    "email": "e2e@example.com",
+    "passwordHash": "$2b$12$blYp2TndzPq2JEsxf2gstuUMoZQsx415Oh1Vkj0Ey45.jVIP1nJ9.",
+    "isAdmin": true
+  },
+  {
+    "id": "6e1276da-87aa-4ab2-8969-c0d7f777512d",
+    "name": "Demo User",
+    "email": "demo@example.com",
+    "passwordHash": "$2b$12$.I/2m2bPDBQJQiRdFN0eROV/C1KEeFSEuqHT7EQ.9KIZO164niUD2",
+    "isAdmin": false
+  },
+  {
+    "id": "939854f6-2458-43a8-9c6f-3b6b0c73048a",
+    "name": "Demo Admin",
+    "email": "admin@demo.com",
+    "passwordHash": "$2b$12$lr.af8AvWKjnwfSh16pkBut5kt5ZYSsgeiyCzyRMy4fSXa6AeQENy",
+    "isAdmin": false
+  },
+  {
+    "id": "ccedd2f8-9f61-404b-8360-4ade4fba1223",
+    "name": "gilson",
+    "email": "gilsonbeermohamed@gmail.com",
+    "passwordHash": "$2b$12$zBQWswanZ20OQCVgmkKcROSx4HGig9S6BoeQVxWWZeLzsx8bQDfqi",
+    "isAdmin": false
+  },
+  {
+    "id": "5226b774-4338-490a-820a-25c3b8462d7f",
+    "name": "Gilson K",
+    "email": "GILSON63800@GMAIL.COM",
+    "passwordHash": "$2b$12$.lWUEQeT0KrsldsOTOYwZuQOoIyXUbxBSpord3CaZkimYnZy3P89S",
+    "isAdmin": false
+  }
+]
